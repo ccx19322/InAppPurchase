@@ -19,6 +19,7 @@ public protocol InAppPurchaseProvidable {
     func fetchProduct(productIdentifiers: Set<String>, handler: ((_ result: Result<[Product], InAppPurchase.Error>) -> Void)?)
     func restore(handler: ((_ result: Result<Set<String>, InAppPurchase.Error>) -> Void)?)
     func purchase(productIdentifier: String, handler: InAppPurchase.PurchaseHandler?)
+    func purchase(productIdentifier: String, userIdentifier: String?, handler: InAppPurchase.PurchaseHandler?)
     func refreshReceipt(handler: InAppPurchase.ReceiptRefreshHandler?)
     func finish(transaction: PaymentTransaction)
     var transactions: [PaymentTransaction] { get }
@@ -157,6 +158,10 @@ extension InAppPurchase: InAppPurchaseProvidable {
     }
 
     public func purchase(productIdentifier: String, handler: InAppPurchase.PurchaseHandler? = nil) {
+        purchase(productIdentifier: productIdentifier, userIdentifier: nil, handler: handler)
+    }
+    
+    public func purchase(productIdentifier: String, userIdentifier: String?, handler: InAppPurchase.PurchaseHandler?) {
         // Fetch product from App Store
         let requestId = UUID().uuidString
         productProvider.fetch(productIdentifiers: [productIdentifier], requestId: requestId) { [weak self] (result) in
@@ -168,7 +173,8 @@ extension InAppPurchase: InAppPurchaseProvidable {
                 }
 
                 // Add payment to App Store queue
-                let payment = SKPayment(product: product)
+                let payment = SKMutablePayment(product: product)
+                payment.applicationUsername = userIdentifier
                 self?.paymentProvider.add(payment: payment, handler: { (_, result) in
                     switch result {
                     case .success(let transaction):

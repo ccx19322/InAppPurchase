@@ -16,6 +16,7 @@ public final class StubInAppPurchase: InAppPurchaseProvidable {
     private let _fetchProductHandler: ((_ productIdentifiers: Set<String>, _ handler: ((_ result: Result<[Product], InAppPurchase.Error>) -> Void)?) -> Void)?
     private let _restoreHandler: ((_ handler: ((_ result: Result<Set<String>, InAppPurchase.Error>) -> Void)?) -> Void)?
     private let _purchaseHandler: ((_ productIdentifier: String, _ handler: InAppPurchase.PurchaseHandler?) -> Void)?
+    private let _purchaseWithUserHandler: ((_ productIdentifier: String, _ userIdentifier: String?, _ handler: InAppPurchase.PurchaseHandler?) -> Void)?
     private let _receiptRefreshHandler: ((_ handler: InAppPurchase.ReceiptRefreshHandler?) -> Void)?
     private let _finishTransaction: ((_ transaction: PaymentTransaction) -> Void)?
     private let _transactions: [PaymentTransaction]
@@ -27,6 +28,7 @@ public final class StubInAppPurchase: InAppPurchaseProvidable {
                 fetchProductHandler: ((_ productIdentifiers: Set<String>, _ handler: ((_ result: Result<[Product], InAppPurchase.Error>) -> Void)?) -> Void)? = nil,
                 restoreHandler: ((_ handler: ((_ result: Result<Set<String>, InAppPurchase.Error>) -> Void)?) -> Void)? = nil,
                 purchaseHandler: ((_ productIdentifier: String, _ handler: InAppPurchase.PurchaseHandler?) -> Void)? = nil,
+                purchaseWithUserHandler: ((_ productIdentifier: String, _ userIdentifier: String?, _ handler: InAppPurchase.PurchaseHandler?) -> Void)? = nil,
                 refreshReceiptHandler: ((_ handler: InAppPurchase.ReceiptRefreshHandler?) -> Void)? = nil,
                 finishTransaction: ((_ transaction: PaymentTransaction) -> Void)? = nil,
                 transactions: [PaymentTransaction] = []) {
@@ -38,6 +40,7 @@ public final class StubInAppPurchase: InAppPurchaseProvidable {
         self._fetchProductHandler = fetchProductHandler
         self._restoreHandler = restoreHandler
         self._purchaseHandler = purchaseHandler
+        self._purchaseWithUserHandler = purchaseWithUserHandler
         self._receiptRefreshHandler = refreshReceiptHandler
         self._finishTransaction = finishTransaction
         self._transactions = transactions
@@ -69,6 +72,10 @@ public final class StubInAppPurchase: InAppPurchaseProvidable {
 
     public func purchase(productIdentifier: String, handler: InAppPurchase.PurchaseHandler?) {
         _purchaseHandler?(productIdentifier, handler)
+    }
+    
+    public func purchase(productIdentifier: String, userIdentifier: String?, handler: InAppPurchase.PurchaseHandler?) {
+        _purchaseWithUserHandler?(productIdentifier, userIdentifier, handler)
     }
 
     public func refreshReceipt(handler: InAppPurchase.ReceiptRefreshHandler?) {

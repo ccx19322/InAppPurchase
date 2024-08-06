@@ -2,8 +2,8 @@
 //  StubSubscriptionPeriod.swift
 //  InAppPurchaseTests
 //
-//  Created by Jin Sasaki on 2018/06/16.
-//  Copyright © 2018年 Jin Sasaki. All rights reserved.
+//  Created by Chen CX on 2018/06/16.
+//  Copyright © 2018年 Chen CX. All rights reserved.
 //
 
 import Foundation

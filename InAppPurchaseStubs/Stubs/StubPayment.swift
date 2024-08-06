@@ -2,8 +2,8 @@
 //  StubPayment.swift
 //  InAppPurchase
 //
-//  Created by Jin Sasaki on 2017/04/11.
-//  Copyright © 2017年 Jin Sasaki. All rights reserved.
+//  Created by Chen CX on 2017/04/11.
+//  Copyright © 2017年 Chen CX. All rights reserved.
 //
 
 import Foundation

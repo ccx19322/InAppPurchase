@@ -2,8 +2,8 @@
 //  InAppPurchaseIntegrationTests.swift
 //  InAppPurchaseTests
 //
-//  Created by Jin Sasaki on 2017/12/20.
-//  Copyright © 2017年 Jin Sasaki. All rights reserved.
+//  Created by Chen CX on 2017/12/20.
+//  Copyright © 2017年 Chen CX. All rights reserved.
 //
 
 import XCTest

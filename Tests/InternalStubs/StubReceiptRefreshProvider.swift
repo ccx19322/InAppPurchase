@@ -2,8 +2,8 @@
 //  StubReceiptRefreshProvider.swift
 //  InAppPurchaseTests
 //
-//  Created by Jin Sasakion 2020/12/10.
-//  Copyright © 2020 Jin Sasaki. All rights reserved.
+//  Created by Chen CXon 2020/12/10.
+//  Copyright © 2020 Chen CX. All rights reserved.
 //
 
 import Foundation
